@@ -1,0 +1,132 @@
+Apache Spark
+Ir a la navegaciónIr a la búsqueda
+	
+Este artículo o sección necesita ser wikificado, por favor, edítalo para que cumpla con las convenciones de estilo.
+Este aviso fue puesto el 2 de enero de 2018.
+Apache Spark
+Spark Logo
+Información general
+Tipo de programa	Data analytics, machine learning algorithms
+Desarrollador	Matei Zaharia
+Lanzamiento inicial	30 de mayo de 2014
+Licencia	Apache License 2.0
+Estado actual	Activo
+Idiomas	inglés
+Información técnica
+Programado en	Scala, Java, Python, R
+Plataformas admitidas	Java
+Versiones
+Última versión estable	2.4.5
+2 de febrero de 2020
+Última versión en pruebas	
+Archivos legibles
+JavaScript Object Notation
+Valores separados por comas
+documento de texto
+Apache Parquet
+Optimized Row Columnar
+Archivos editables
+Valores separados por comas
+JavaScript Object Notation
+Apache Parquet
+documento de texto
+Optimized Row Columnar
+Enlaces
+Sitio web oficial
+Repositorio de código
+Seguimiento de errores
+[editar datos en Wikidata]
+Apache Spark es un framework de computación en clúster open-source. Fue desarrollada originariamente en la Universidad de California, en el AMPLab de Berkeley. El código base del proyecto Spark fue donado más tarde a la Apache Software Foundation que se encarga de su mantenimiento desde entonces. Spark proporciona una interfaz para la programación de clusters completos con Paralelismo de Datos implícito y tolerancia a fallos.
+
+Apache Spark se puede considerar un sistema de computación en clúster de propósito general y orientado a la velocidad. Proporciona APIs en Java, Scala, Python y R. También proporciona un motor optimizado que soporta la ejecución de grafos en general. También soporta un conjunto extenso y rico de herramientas de alto nivel entre las que se incluyen Spark SQL (para el procesamiento de datos estructurados basada en SQL), MLlib para implementar machine learning, GraphX para el procesamiento de grafos y Spark Streaming.
+
+Historia
+Spark fue desarrollado en sus inicios por Matei Zaharia en el AMPLab de la UC Berkeley en 2009. Fue liberado como código abierto en 2010 bajo licencia BSD.
+
+En 2013, el proyecto fue donado a la Apache Software Foundation y se modificó su licencia a Apache 2.0. En febrero de 2014, Spark se convirtió en un Top-Level Apache Project.1​
+
+En noviembre de 2014, la empresa de su fundador, M. Zaharia, Databricks obtuvo un nuevo récord mundial en la ordenación a gran escala usando Spark.2​
+
+Hacia 2015, Spark tenía más de 1000 contribuidores3​ convirtiéndose en uno de los proyectos más activos de la Apache Software Foundation4​ y en uno de los proyectos de big data open source más activos.
+
+Dada la popularidad de la plataforma hacia el 2014, programas de pago como la General Assembly and free fellowships like The Data Incubator comenzaron a ofrecer cursos de formación personalizados5​
+
+Versión	Fecha de la distribución original	Última versión	Fecha de la distribución
+0.5	12-06-2012	0.5.1	07-10-2012
+0.6	14-10-2012	0.6.2	07-02-20136​
+0.7	27-02-2013	0.7.3	16-07-2013
+0.8	25-09-2013	0.8.1	19-12-2013
+0.9	02-02-2014	0.9.2	23-07-2014
+1.0	30-05-2014	1.0.2	05-08-2014
+1.1	11-09-2014	1.1.1	26-11-2014
+1.2	18-12-2014	1.2.2	17-04-2015
+1.3	13-03-2015	1.3.1	17-04-2015
+1.4	11-06-2015	1.4.1	15-07-2015
+1.5	09-09-2015	1.5.2	09-11-2015
+1.6	04-01-2016	1.6.3	07-11-2016
+2.0	26-07-2016	2.0.2	14-11-2016
+2.1	28-12-2016	2.1.3	26-06-2018
+2.2	11-07-2017	2.2.3	11-01-2019
+2.3	28-02-2018	2.3.4	09-09-2019
+2.4	02-11-2018	2.4.7	12-10-20207​
+3.0	18-06-2020	3.0.2	19-02-20208​
+3.1	02-03-2021	3.1.1	02-03-20219​
+Leyenda:Versión antiguaVersión antigua, con soporte técnicoÚltima versiónÚltima versión previa
+Introducción
+Apache Spark tiene la base de su arquitectura en el llamado RDD o Resilient Distributed DataSet que es un multiset de solo lectura de ítems de datos distribuidos a lo largo de un clúster de máquinas que se mantiene en un entorno tolerante de fallos.10​
+
+En Spark 1.x, RDD era la API principal pero con el desarrollo de Spark 2.0, se recomienda la utilización de la API DataSet.11​ aunque la API RDD no se considera descatalogada.12​13​ la tecnología RDD todavía está presente en la base de la API DataSet.14​
+
+Spark y sus RDDs fueron desarrollados en 2012 en respuesta a las limitaciones del paradigma de computación en clúster MapReduce que fuerza a la utilización de una estructura lineal dataflow en particular en los programas distribuidos: Los programas basados en MapReduce leen los datos de entrada desde disco, que mapea una función a lo largo de los datos, reduce los resultados del mapa y almacena los resultados de la reducción en disco.
+
+Los RDDs de Spark funcionan como un working set para los programas distribuidos que ofrecen una forma (deliberadamente) restringida de la memoria compartida distribuida.15​
+
+Spark facilita la implementación de tanto algoritmos iterativos que visitan su dataset muchas veces en un mismo bucle tanto como el análisis de datos interactivo/exploratorio (i.e.
+
+a loop, and interactive/exploratory data analysis, i.e., the repeated database-style querying of data.
+
+La latencia de estas aplicaciones se puede reducir en varios órdenes de magnitud en comparación con la implementación basada en MapReduce (comúnmente utilizada i.e. en los stacks basados en Apache Hadoop.10​16​
+
+Más allá de los algoritmos de tipor iterativos, están los algoritmos de entrenamiento para sistemas de machine learning , que constituyeron el impulso inicial del desarrollo de Apache Spark.17​
+
+Apache Spark requiere de un cluster manager y un sistema de almacenamiento distribuido.
+
+Para la gestión del clúster, Spark soporta las opciones siguientes:
+
+Spark Standalone (Cluster Spark Nativo)
+Hadoop YARN
+Apache Mesos.18​
+Para el almacenamiento distribuido, Spark presenta interfaces hacia una gran variedad de plataformas:
+
+Hadoop Distributed File System (HDFS)19​
+MapR File System (MapR-FS)20​
+Cassandra21​
+OpenStack Swift
+Amazon S3
+Azure Databricks
+Kudu
+Incluso soporta una solución personalizada.
+Spark también soporta un modo local pseudo-distribuido, normalmente utilizado solamente para pruebas o en entornos de desarrollo donde el almacenamiento distribuido no es obligatorio y se puede usar el sistema de archivos local; en un escenarion como este, Spark se ejecuta en una única máquina con un executor por cada core de CPU.
+
+Referencias
+ «The Apache Software Foundation Announces Apache&#8482 Spark&#8482 as a Top-Level Project». apache.org. Apache Software Foundation. 27 de febrero de 2014. Consultado el 4 de marzo de 2014.
+ Spark officially sets a new record in large-scale sorting
+ Open HUB Spark development activity
+ «The Apache Software Foundation Announces Apache&#8482 Spark&#8482 as a Top-Level Project». apache.org. Apache Software Foundation. 27 de febrero de 2014. Consultado el 4 de marzo de 2014.
+ «NY gets new bootcamp for data scientists: It’s free, but harder to get into than Harvard». Venture Beat. Consultado el 21 de febrero de 2016.
+ «Spark News». apache.org. Consultado el 30 de marzo de 2017.
+ «Spark News». apache.org.
+ «Spark News». apache.org.
+ «Spark News». apache.org.
+ Zaharia, Matei; Chowdhury, Mosharaf; Franklin, Michael J.; Shenker, Scott; Stoica, Ion. Spark: Cluster Computing with Working Sets. USENIX Workshop on Hot Topics in Cloud Computing (HotCloud).
+ «Spark 2.2.0 Quick Start». apache.org. 11 de julio de 2017. Consultado el 19 de octubre de 2017. «we highly recommend you to switch to use Dataset, which has better performance than RDD».
+ «Spark 2.2.0 deprecation list». apache.org. 11 de julio de 2017. Consultado el 10 de octubre de 2017.
+ Damji, Jules (14 de julio de 2016). «A Tale of Three Apache Spark APIs: RDDs, DataFrames, and Datasets: When to use them and why». databricks.com. Consultado el 19 de octubre de 2017.
+ Chambers, Bill (10 de agosto de 2017). «11». Spark: The Definitive Guide ("Rough Cut" pre-print edición). O'Reilly Media. «virtually all Spark code you run, where DataFrames or Datasets, compiles down to an RDD».
+ Zaharia, Matei; Chowdhury, Mosharaf; Das, Tathagata; Dave, Ankur; Ma,, Justin; McCauley, Murphy; J., Michael; Shenker, Scott et al.. Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing. USENIX Symp. Networked Systems Design and Implementation.
+ Xin, Reynold; Rosen, Josh; Zaharia, Matei; Franklin, Michael; Shenker, Scott; Stoica, Ion (June 2013). Shark: SQL and Rich Analytics at Scale.
+ Harris, Derrick (28 de junio de 2014). «4 reasons why Spark could jolt Hadoop into hyperdrive». Gigaom.
+ «Cluster Mode Overview - Spark 1.2.0 Documentation - Cluster Manager Types». apache.org. Apache Foundation. 18 de diciembre de 2014. Consultado el 18 de enero de 2015.
+ Figure showing Spark in relation to other open-source Software projects including Hadoop
+ MapR ecosystem support matrix
+ Doan, DuyHai (10 de septiembre de 2014), «Re: cassandra + spark / pyspark», lista de correo Cassandra User, consultado el 21 de noviembre de 2014.
